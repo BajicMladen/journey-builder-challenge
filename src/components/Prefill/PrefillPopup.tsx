@@ -1,12 +1,15 @@
-import { useRef } from "react";
-import { Node } from "../../types/base";
-import { Button } from "../generic/Button/Button";
-import { Toggle } from "../generic/Toggle.tsx/Toggle";
+import { useRef, useState } from "react";
+import PrefillModal from "./PrefillModal.tsx";
+import { Node } from "../../types/base.ts";
+import { Button } from "../generic/Button/Button.tsx";
+import { Toggle } from "../generic/Toggle/Toggle.tsx";
 import DatabaseIcon from "../../assets/database-icon.svg";
 import CloseIcon from "../../assets/close-icon.svg";
+import { useGraph } from "../../context/GraphContext.tsx";
 
 type PrefillPopupProps = {
   node: Node;
+  preReqNodes: Node[];
   onClose: () => void;
   handleFormChange: (
     selectedField: string,
@@ -17,10 +20,29 @@ type PrefillPopupProps = {
 
 const PrefillPopup = ({
   node,
+  preReqNodes,
   onClose,
   handleFormChange,
 }: PrefillPopupProps) => {
   const popupRef = useRef(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedField, setSelectedField] = useState("");
+
+  const { dispatch } = useGraph();
+
+  const handlePrefill = () => {
+    if (node.data.prefillForm) {
+      dispatch({
+        type: "REMOVE_INHERITED_FIELDS",
+        payload: { currentNode: node },
+      });
+    } else {
+      dispatch({
+        type: "POPULATE_FORM_FROM_ANCESTORS",
+        payload: { currentNode: node },
+      });
+    }
+  };
 
   return (
     <div
@@ -32,7 +54,10 @@ const PrefillPopup = ({
           <div className="text-lg font-normal">{node.data.name} Prefill</div>
           <div className="text-sm">Prefill text for this form</div>
         </div>
-        <Toggle checked={true} handleChange={() => console.log()} />
+        <Toggle
+          checked={node.data.prefillForm}
+          handleChange={() => handlePrefill()}
+        />
       </div>
       <div className="space-y-3 w-full">
         {Object.entries(node.data.form ?? {}).map(([key, value]) => (
@@ -40,7 +65,8 @@ const PrefillPopup = ({
             <div
               onClick={() => {
                 if (!value.data?.source) {
-                  console.log(true);
+                  setSelectedField(key);
+                  setIsModalOpen(true);
                 }
               }}
               className={`mt-1 block w-full p-2  border-gray-300  text-gray-700 bg-gray-200  ${
@@ -85,6 +111,16 @@ const PrefillPopup = ({
       <Button handleClick={onClose} className="mt-4 w-full py-3">
         Close
       </Button>
+
+      {isModalOpen && (
+        <PrefillModal
+          onSelect={(value: string, key: string) =>
+            handleFormChange(selectedField, value, key)
+          }
+          onClose={() => setIsModalOpen(false)}
+          preReqNodes={preReqNodes}
+        />
+      )}
     </div>
   );
 };

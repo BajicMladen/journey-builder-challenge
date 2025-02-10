@@ -21,6 +21,7 @@ export interface Data {
   approval_required: boolean;
   approval_roles: string[];
   form: FieldSchemaProperties;
+  prefillForm: boolean;
 }
 
 export interface Node {

@@ -17,6 +17,8 @@ export const parseNodes = (graphData: ActionBlueprintGraphDescription) => {
         ...node.data,
         label: node.data.name,
         form: from?.field_schema.properties,
+        prerequisites: getPrerequisiteNodes(graphData, node.id),
+        prefillForm: false,
       },
       position: node.position,
     };
@@ -29,4 +31,31 @@ export const parseEdges = (graphData: ActionBlueprintGraphDescription) => {
     source: edge.source,
     target: edge.target,
   }));
+};
+
+const getPrerequisiteNodes = (
+  graphData: ActionBlueprintGraphDescription,
+  nodeId: string
+) => {
+  const nodeMap = Object.fromEntries(
+    graphData.nodes.map((node) => [node.id, node])
+  );
+  const visited = new Set();
+  const result: string[] = [];
+
+  const traverse = (id: string) => {
+    if (!id || visited.has(id)) return;
+    visited.add(id);
+
+    const node = nodeMap[id];
+    if (node?.data?.prerequisites) {
+      node.data.prerequisites.forEach((prereqId) => {
+        traverse(prereqId);
+        result.push(prereqId);
+      });
+    }
+  };
+
+  traverse(nodeId);
+  return result.reverse();
 };

@@ -1,5 +1,5 @@
 import { Handle, Position } from "reactflow";
-import FormIcon from "../../assets/form-icon.svg";
+import { FormIcon } from "../../assets";
 
 interface FormNodeProps {
   data: {

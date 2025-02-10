@@ -1,11 +1,9 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import PrefillModal from "./PrefillModal.tsx";
 import { Node } from "../../types/base.ts";
-import { Button } from "../generic/Button/Button.tsx";
-import { Toggle } from "../generic/Toggle/Toggle.tsx";
-import DatabaseIcon from "../../assets/database-icon.svg";
-import CloseIcon from "../../assets/close-icon.svg";
 import { useGraph } from "../../context/GraphContext.tsx";
+import { Button, Toggle } from "../generic";
+import { CloseIcon, DatabaseIcon } from "../../assets/index.ts";
 
 type PrefillPopupProps = {
   node: Node;
@@ -24,7 +22,6 @@ const PrefillPopup = ({
   onClose,
   handleFormChange,
 }: PrefillPopupProps) => {
-  const popupRef = useRef(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedField, setSelectedField] = useState("");
 
@@ -45,10 +42,7 @@ const PrefillPopup = ({
   };
 
   return (
-    <div
-      ref={popupRef}
-      className="absolute bg-white border top-0 left-0 border-gray-300 shadow-lg rounded-lg p-6 w-full  max-h-80 overflow-scroll flex flex-col items-center"
-    >
+    <div className="absolute bg-white border top-0 left-0 border-gray-300 shadow-lg rounded-lg p-6 w-full  max-h-80 overflow-scroll flex flex-col items-center">
       <div className="flex flex-row justify-between items-center mb-4 w-full">
         <div>
           <div className="text-lg font-normal">{node.data.name} Prefill</div>

@@ -29,7 +29,7 @@ const DEFAULT_TOGGLE_STYLE = [
   "peer-checked:after:border-indigo-600",
 ].join(" ");
 
-export const Toggle = ({ checked, disabled, handleChange }: ToggleProps) => {
+const Toggle = ({ checked, disabled, handleChange }: ToggleProps) => {
   return (
     <label
       className="relative inline-flex cursor-pointer items-center"
@@ -49,3 +49,5 @@ export const Toggle = ({ checked, disabled, handleChange }: ToggleProps) => {
     </label>
   );
 };
+
+export default Toggle;

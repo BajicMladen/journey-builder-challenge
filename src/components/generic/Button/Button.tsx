@@ -6,7 +6,7 @@ type ButtonProps = {
   className?: string;
   children: React.ReactNode;
 };
-export const Button = ({
+const Button = ({
   disabled = false,
   type = "button",
   handleClick,
@@ -28,3 +28,5 @@ export const Button = ({
     </button>
   );
 };
+
+export default Button;

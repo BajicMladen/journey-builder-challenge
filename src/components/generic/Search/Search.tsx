@@ -1,5 +1,5 @@
 import { useState, ChangeEvent } from "react";
-import SearchIcon from "../../../assets/search.svg";
+import { SearchIcon } from "../../../assets";
 
 interface SearchProps {
   onSearch: (query: string) => void;

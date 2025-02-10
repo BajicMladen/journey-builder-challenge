@@ -5,8 +5,7 @@ import {
   useRef,
   useState,
 } from "react";
-
-import arrowIcon from "../../../assets/arrow-icon.svg";
+import { ArrowIcon } from "../../../assets";
 
 type CollapseProps = {
   title: string;
@@ -44,7 +43,7 @@ const Collapse = forwardRef(
           role="button"
         >
           <img
-            src={arrowIcon}
+            src={ArrowIcon}
             alt="arrow-icon.svg"
             className={`${
               isOpen ? "rotate-90" : "rotate-0"
@@ -67,4 +66,4 @@ const Collapse = forwardRef(
 
 Collapse.displayName = "Collapse";
 
-export { Collapse };
+export default Collapse;

@@ -1,9 +1,8 @@
 import { Node } from "../../types/base";
 import { createPortal } from "react-dom";
-import { Button } from "../generic/Button/Button";
-import Search from "../generic/Search/Search";
-import { Collapse } from "../generic/Collapse/Collapse";
 import { useState } from "react";
+
+import { Button, Search, Collapse } from "../generic";
 
 import { GLOBAL_DATA } from "../../mock/global-data";
 

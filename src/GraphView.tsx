@@ -5,10 +5,11 @@ import { useMemo, useState } from "react";
 import { Node } from "./types/base";
 
 import FormNode from "./components/react-flow/FormNode";
+import PrefillPopup from "./components/Prefill/PrefillPopup";
 
 const GraphView = () => {
   const { state } = useGraph();
-  const [, setSelectedNode] = useState<Node | null>(null);
+  const [selectedNode, setSelectedNode] = useState<Node | null>(null);
 
   const nodeTypes = useMemo(() => ({ form: FormNode }), []);
 
@@ -27,6 +28,14 @@ const GraphView = () => {
       >
         <Background />
       </ReactFlow>
+
+      {selectedNode && (
+        <PrefillPopup
+          node={state.nodes.find((node) => node.id === selectedNode.id) as Node}
+          onClose={() => setSelectedNode(null)}
+          handleFormChange={() => console.log("update")}
+        />
+      )}
     </div>
   );
 };

@@ -1,50 +1,57 @@
-# React + TypeScript + Vite
+# Journey Builder React Coding Challenge
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a solution to the **Journey Builder React Coding Challenge**. The challenge involves reimplementing a small portion of a node-based UI that displays a Directed Acyclic Graph (DAG) of forms. The UI allows users to configure prefill mappings for form fields, where values from one form can be used to prefill fields in downstream forms.
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The application consists of the following key features:
 
-## Expanding the ESLint configuration
+1. **Rendering a DAG of Forms**: The UI renders nodes and edges based on data fetched from the `action-blueprint-graph-get` endpoint.
+2. **Prefill Configuration**: Users can configure prefill mappings for form fields. The prefill data can come from:
+   - Directly dependent forms (e.g., Form B for Form D).
+   - Transitively dependent forms (e.g., Form A for Form D).
+   - Global data (e.g., Action Properties or Client Organization Properties).
+3. **Prefill Modal**: A modal allows users to select the source of prefill data for a specific field.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Prerequisites
 
-- Configure the top-level `parserOptions` property like this:
+- **React**: The project is built using React.
+- **TypeScript**: TypeScript is used for type safety.
+- **Build Tool**: The project uses Vite.
+- **Mock Server**: A mock server is provided in this [repository](https://github.com/mosaic-avantos/frontendchallengeserver) to simulate the `action-blueprint-graph-get` endpoint.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Local Development
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### Prerequisites
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+- PNPM (preferred package manager)
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+### Setup
+
+#### Server App
+
+Please navigate to this [repository](https://github.com/mosaic-avantos/frontendchallengeserver) and follow instructions.
+
+#### Client App
+
+1. Clone the repository:
+   ```bash
+   git clone git@github.com:BajicMladen/journey-builder-challenge.git
+   cd journey-builder-challenge
+   ```
+2. Install dependencies:
+   ```bash
+   pnpm install
+   ```
+3. Start development servers:
+   ```bash
+   pnpm run dev
+   ```
+
+## Contributing
+
+1. Fork the repository.
+2. Create a feature branch: `git checkout -b feature-name`.
+3. Commit your changes: `git commit -m "Add feature"`.
+4. Push to the branch: `git push origin feature-name`.
+5. Open a pull request.

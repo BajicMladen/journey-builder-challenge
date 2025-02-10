@@ -48,6 +48,12 @@ Please navigate to this [repository](https://github.com/mosaic-avantos/frontendc
    pnpm run dev
    ```
 
+## Preview
+  
+![Screenshot 2025-02-10 at 22 43 21](https://github.com/user-attachments/assets/1e20a326-c197-403c-a990-cb90c15e64ed)
+
+![Screenshot 2025-02-10 at 22 43 55](https://github.com/user-attachments/assets/60b207b9-e9cd-4a73-a371-b10041ef1571)
+
 ## Contributing
 
 1. Fork the repository.

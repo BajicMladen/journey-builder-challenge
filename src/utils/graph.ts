@@ -33,29 +33,38 @@ export const parseEdges = (graphData: ActionBlueprintGraphDescription) => {
   }));
 };
 
-const getPrerequisiteNodes = (
+export const getPrerequisiteNodes = (
   graphData: ActionBlueprintGraphDescription,
   nodeId: string
 ) => {
   const nodeMap = Object.fromEntries(
-    graphData.nodes.map((node) => [node.id, node])
+    graphData.nodes.map((node: Node) => [node.id, node])
   );
-  const visited = new Set();
+  const visited = new Set<string>();
   const result: string[] = [];
+  const queue: string[] = [nodeId];
 
-  const traverse = (id: string) => {
-    if (!id || visited.has(id)) return;
-    visited.add(id);
+  while (queue.length > 0) {
+    const currentId = queue.shift();
 
-    const node = nodeMap[id];
-    if (node?.data?.prerequisites) {
-      node.data.prerequisites.forEach((prereqId) => {
-        traverse(prereqId);
-        result.push(prereqId);
+    if (!currentId || visited.has(currentId)) {
+      continue;
+    }
+
+    visited.add(currentId);
+
+    const currentNode = nodeMap[currentId];
+    if (currentNode?.data?.prerequisites) {
+      currentNode.data.prerequisites.forEach((prereqId: string) => {
+        if (!visited.has(prereqId)) {
+          queue.push(prereqId);
+        }
       });
     }
-  };
 
-  traverse(nodeId);
-  return result.reverse();
+    if (currentId !== nodeId) {
+      result.push(currentNode.id);
+    }
+  }
+  return result;
 };

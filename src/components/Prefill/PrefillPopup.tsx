@@ -4,6 +4,7 @@ import { Node } from "../../types/base.ts";
 import { useGraph } from "../../context/GraphContext.tsx";
 import { Button, Toggle } from "../generic";
 import { CloseIcon, DatabaseIcon } from "../../assets/index.ts";
+import { GRAPH_STATE_ACTIONS } from "../../enums/state.ts";
 
 type PrefillPopupProps = {
   node: Node;
@@ -30,12 +31,12 @@ const PrefillPopup = ({
   const handlePrefill = () => {
     if (node.data.prefillForm) {
       dispatch({
-        type: "REMOVE_INHERITED_FIELDS",
+        type: GRAPH_STATE_ACTIONS.REMOVE_INHERITED_FIELDS,
         payload: { currentNode: node },
       });
     } else {
       dispatch({
-        type: "POPULATE_FORM_FROM_ANCESTORS",
+        type: GRAPH_STATE_ACTIONS.POPULATE_FORM_FROM_ANCESTORS,
         payload: { currentNode: node },
       });
     }

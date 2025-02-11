@@ -9,6 +9,7 @@ import { fetchActionBlueprint } from "../api/api";
 import { parseNodes, parseEdges } from "../utils/graph";
 import { graphReducer } from "../state/graphReducer";
 import { GraphAction, GraphState } from "../types/state";
+import { GRAPH_STATE_ACTIONS } from "../enums/state";
 
 const GraphContext = createContext<
   { state: GraphState; dispatch: React.Dispatch<GraphAction> } | undefined
@@ -27,10 +28,16 @@ export const GraphProvider = ({ children }: { children: ReactNode }) => {
 
         const nodes = parseNodes(data);
         const edges = parseEdges(data);
-        dispatch({ type: "SET_GRAPH", payload: { nodes, edges } });
+        dispatch({
+          type: GRAPH_STATE_ACTIONS.SET_GRAPH,
+          payload: { nodes, edges },
+        });
       } catch (error) {
         console.error("Failed to fetch graph:", error);
-        dispatch({ type: "SET_GRAPH", payload: { nodes: [], edges: [] } });
+        dispatch({
+          type: GRAPH_STATE_ACTIONS.SET_GRAPH,
+          payload: { nodes: [], edges: [] },
+        });
       }
     };
 

@@ -6,6 +6,7 @@ import { Node } from "./types/base";
 
 import FormNode from "./components/react-flow/FormNode";
 import PrefillPopup from "./components/prefill/PrefillPopup";
+import { GRAPH_STATE_ACTIONS } from "./enums/state";
 
 const GraphView = () => {
   const { state, dispatch } = useGraph();
@@ -27,7 +28,7 @@ const GraphView = () => {
   const updateField = (selectedField: string, nodeId: string, key: string) => {
     if (!selectedNode) return;
     dispatch({
-      type: "UPDATE_NODE_DATA",
+      type: GRAPH_STATE_ACTIONS.UPDATE_NODE_DATA,
       payload: {
         selectedField,
         currentNode: selectedNode.id,

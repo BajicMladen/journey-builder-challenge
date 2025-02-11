@@ -30,6 +30,7 @@ export const GraphProvider = ({ children }: { children: ReactNode }) => {
         dispatch({ type: "SET_GRAPH", payload: { nodes, edges } });
       } catch (error) {
         console.error("Failed to fetch graph:", error);
+        dispatch({ type: "SET_GRAPH", payload: { nodes: [], edges: [] } });
       }
     };
 

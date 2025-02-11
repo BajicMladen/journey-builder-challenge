@@ -18,18 +18,19 @@ const GraphView = () => {
   };
 
   const getPrerequisitesNodes = () => {
-    const test = state.nodes.filter((node) =>
+    if (!selectedNode) return [];
+    return state.nodes.filter((node) =>
       selectedNode?.data.prerequisites.includes(node.id)
     );
-    return test;
   };
 
   const updateField = (selectedField: string, nodeId: string, key: string) => {
+    if (!selectedNode) return;
     dispatch({
       type: "UPDATE_NODE_DATA",
       payload: {
-        selectedField: selectedField,
-        currentNode: selectedNode?.id ?? "",
+        selectedField,
+        currentNode: selectedNode.id,
         targetNode: nodeId,
         key,
       },

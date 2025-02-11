@@ -53,8 +53,8 @@ const Collapse = forwardRef(
         </div>
         <div
           ref={contentRef}
-          className={`transition-height overflow-hidden duration-700 ease-in-out ${
-            isOpen ? "max-h-[700px]" : "max-h-0"
+          className={`overflow-hidden transition-all duration-500 ${
+            isOpen ? "max-h-screen" : "max-h-0"
           }`}
         >
           {children}

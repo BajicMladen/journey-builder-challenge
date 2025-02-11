@@ -41,8 +41,10 @@ const Toggle = ({ checked, disabled, handleChange }: ToggleProps) => {
         disabled={disabled}
         className="peer sr-only"
         onChange={(e) => {
-          e.stopPropagation();
-          handleChange();
+          if (!disabled) {
+            e.stopPropagation();
+            handleChange();
+          }
         }}
       />
       <div className={DEFAULT_TOGGLE_STYLE}></div>

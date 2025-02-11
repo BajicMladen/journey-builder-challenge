@@ -62,7 +62,7 @@ export const getPrerequisiteNodes = (
       });
     }
 
-    if (currentId !== nodeId) {
+    if (currentNode && currentId !== nodeId) {
       result.push(currentNode.id);
     }
   }

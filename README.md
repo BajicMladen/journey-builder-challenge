@@ -47,6 +47,10 @@ Please navigate to this [repository](https://github.com/mosaic-avantos/frontendc
    ```bash
    pnpm run dev
    ```
+4. Run tests: 
+   ```bash
+   pnpm vitest
+   ```
 
 ## Preview
   
